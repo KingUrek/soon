@@ -7,7 +7,7 @@ services:
       - POSTGRES_USER=soon
       - POSTGRES_PASSWORD=dev
       - POSTGRES_DB=soon
-      - POSTGRES_HOST=soon-api_db_1
+      - POSTGRES_HOST=api-soon_db_1
       - AMBIENTE=DESENV
       - HOST=localhost:3000
     ports:
