@@ -12,10 +12,7 @@ export const PlansSlice = createSlice({
   name: 'plans',
   initialState,
   reducers: {
-    updatePlans: (state, action) => {
-      state = [{ name: 'gabriel', id: 1234 }, ...action.payload];
-      return state;
-    },
+    updatePlans: (state, action) => action.payload,
   },
 });
 

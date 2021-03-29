@@ -44,11 +44,11 @@ export default function ClientTable() {
         </TableHead>
         <TableBody>
           {rows.map(({ plan, customer, vehicle }) => (
-            <TableRow key={customer.cpf}>
-              <TableCell align="center" component="th" scope="row">
+            <TableRow data-testid="user-row" key={customer.cpf}>
+              <TableCell data-testid="name-cell" align="center" component="th" scope="row">
                 {customer.name}
               </TableCell>
-              <TableCell align="right">{vehicle.plate}</TableCell>
+              <TableCell data-testid="plate-cell" align="right">{vehicle.plate}</TableCell>
               <TableCell align="right">{vehicle.description}</TableCell>
               <TableCell align="right">{plan.product}</TableCell>
               <TableCell align="right">{plan.begin_date}</TableCell>

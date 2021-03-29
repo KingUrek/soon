@@ -22,6 +22,7 @@ export default function ClientForm() {
         className="form_field"
         value={useAppSelector(({ registerUser }) => registerUser.customer.name)}
         required
+        data-testid="name-input"
         id="name"
         label="Nome"
         variant="outlined"
@@ -29,6 +30,7 @@ export default function ClientForm() {
       <TextField
         className="form_field"
         required
+        data-testid="phone-input"
         onChange={(e) => {
           dispatch(changePhone(e.target.value));
         }}
@@ -44,6 +46,7 @@ export default function ClientForm() {
         onChange={(e) => {
           dispatch(changeCpf(e.target.value));
         }}
+        data-testid="cpf-input"
         className="form_field"
         value={useAppSelector(({ registerUser }) => registerUser.customer.cpf)}
         required
@@ -57,6 +60,7 @@ export default function ClientForm() {
           dispatch(changeEmail(e.target.value));
         }}
         className="form_field"
+        data-testid="email-input"
         value={useAppSelector(
           ({ registerUser }) => registerUser.customer.email,
         )}

@@ -20,13 +20,17 @@ export default function VehicleForm() {
         onChange={(e) => {
           dispatch(changeDescription(e.target.value));
         }}
-        value={useAppSelector(({ registerUser }) => registerUser.vehicle.description)}
+        value={useAppSelector(
+          ({ registerUser }) => registerUser.vehicle.description,
+        )}
+        data-testid="description-input"
         id="Description"
         label="Descrição"
         variant="outlined"
       />
       <TextField
         required
+        data-testid="plate-input"
         onChange={(e) => {
           dispatch(changePlate(e.target.value));
         }}
@@ -38,6 +42,7 @@ export default function VehicleForm() {
       />
       <TextField
         required
+        data-testid="year-input"
         onChange={(e) => {
           dispatch(changeYear(e.target.value));
         }}
@@ -51,7 +56,10 @@ export default function VehicleForm() {
         onChange={(e) => {
           dispatch(changeWarancyDate(e.target.value));
         }}
-        value={useAppSelector(({ registerUser }) => registerUser.vehicle.warranty_date)}
+        value={useAppSelector(
+          ({ registerUser }) => registerUser.vehicle.warranty_date,
+        )}
+        data-testid="warranty-date-input"
         required
         type="date"
         InputLabelProps={{

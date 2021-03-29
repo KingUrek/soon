@@ -50,6 +50,7 @@ export default function RegisterUser() {
         color="primary"
         onClick={() => setActiveStep(activeStep - 1)}
         disabled={activeStep <= 0}
+        data-testid="back-button"
       >
         Voltar
       </Button>

@@ -20,12 +20,13 @@ export default function FeedBackPage() {
     return feedbackMessages[status];
   }
   return (
-    <Container>
+    <Container data-testid="feedback-message">
       <Typography variant="h3">{getFeedBackMessage()}</Typography>
       <Button
         variant="contained"
         color="primary"
         style={{ marginTop: 30 }}
+        data-testid="register-user-again"
         onClick={() => dispatch(UpdateStatusToOnGoing())}
       >
         Cadastrar novo Usuário

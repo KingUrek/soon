@@ -21,6 +21,8 @@ export default function Navigation({
         disabled={firstActived}
         onClick={toggle}
         color="primary"
+        data-testid="create-users"
+
       >
         Criar Usuário
       </Button>
@@ -28,6 +30,7 @@ export default function Navigation({
         onClick={toggle}
         variant="contained"
         color="primary"
+        data-testid="list-users"
         disabled={!firstActived}
       >
         Ver Usuários

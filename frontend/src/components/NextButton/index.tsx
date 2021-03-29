@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { subscribeCustomer } from '../../utils/api';
+import { subscribeCustomer, getSubscribers } from '../../utils/api';
 import {
   UpdateStatusToFailure,
   UpdateStatusToSucess,
@@ -10,6 +10,7 @@ import {
   setCurrentStep,
 } from '../../redux/Slicers/pagestatus';
 import { resetUserData } from '../../redux/Slicers/registerUser';
+import { updateRawCustomerData, filterCustomerData } from '../../redux/Slicers/clients';
 
 function isCompleted(stepInformation: string[]) {
   return stepInformation.every((data) => Boolean(data));
@@ -17,13 +18,12 @@ function isCompleted(stepInformation: string[]) {
 interface INextButton {
   steps: string[];
 }
-export default function NextButton({
-  steps,
-}: INextButton) {
+export default function NextButton({ steps }: INextButton) {
   const dispatch = useAppDispatch();
   const userInformation = useAppSelector(({ registerUser }) => registerUser);
   const activeStep = useAppSelector(({ pageStatus }) => pageStatus.currentStep);
-  function setActiveStep(value:number) {
+
+  function setActiveStep(value: number) {
     return dispatch(setCurrentStep(value));
   }
 
@@ -53,9 +53,16 @@ export default function NextButton({
     if (activeStep === steps.length - 1) {
       return subscribeCustomer(userInformation)
         .then(({ status }) => dispatch(
-          status === 500 ? UpdateStatusToFailure() : UpdateStatusToSucess(),
+          status === 400 ? UpdateStatusToFailure() : UpdateStatusToSucess(),
         ))
-        .then(resetUserForm);
+        .catch(() => dispatch(UpdateStatusToFailure()))
+        .then(resetUserForm)
+        .then(() => {
+          getSubscribers().then((data) => {
+            dispatch(updateRawCustomerData(data));
+            dispatch(filterCustomerData(data));
+          });
+        });
     }
     if (isStepCompleted(activeStep)) {
       return setActiveStep(activeStep + 1);
@@ -68,6 +75,7 @@ export default function NextButton({
       color="primary"
       style={{ marginLeft: '30%' }}
       onClick={buttonOnClick}
+      data-testid="next-button"
     >
       {getButtonText()}
     </Button>

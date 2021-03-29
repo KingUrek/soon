@@ -37,6 +37,7 @@ export default function TableFilter() {
       <TextField
         InputLabelProps={{ shrink: true }}
         id="name_filter"
+        data-testid="name-filter"
         label="Filtrar por nome"
         onChange={(e) => onChange('customer', e.target.value)}
         required
@@ -46,6 +47,7 @@ export default function TableFilter() {
         variant="outlined"
       />
       <TextField
+        data-testid="plate-filter"
         InputLabelProps={{ shrink: true }}
         id="plate_filter"
         label="Filtrar por placa"
@@ -56,7 +58,12 @@ export default function TableFilter() {
         value={filters.plateFilter}
         variant="outlined"
       />
-      <Button variant="contained" color="primary" onClick={filterData}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={filterData}
+        data-testid="filter-button"
+      >
         Filtrar
       </Button>
     </Container>
