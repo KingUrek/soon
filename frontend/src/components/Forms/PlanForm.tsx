@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 
 import {
-  TextField, Select, InputLabel,
+  TextField, Select, FormControl,
 } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   changeBeginDate,
@@ -11,8 +10,9 @@ import {
   changeProduct,
 } from '../../redux/Slicers/registerUser';
 
+import { InputsContainer } from './style';
+
 import { Iplan } from '../../redux/Slicers/plans';
-// import { Form } from './style';
 
 function isPlateEven(plate: string) {
   return parseInt(plate[plate.length - 1], 10) % 2 === 0;
@@ -37,34 +37,30 @@ export default function PlanForm() {
   ]);
 
   return (
-    <FormControl style={{
-      display: 'flex',
-      flexWrap: 'nowrap',
-      width: '80%',
-      justifyContent: 'space-between',
-      margin: 'auto',
-      marginBottom: '30px',
-    }}
-    >
 
-      <InputLabel htmlFor="age-native-simple">Plano</InputLabel>
-      <Select
-        native
-        onChange={(e) => {
-          dispatch(changeProduct(e.target.value));
-        }}
-        data-testid="plan-input"
-        value={useAppSelector(({ registerUser }) => registerUser.plan.product)}
-        required
-        style={{ width: 300 }}
-        type="text"
-        id="product"
-        variant="outlined"
-      >
-        {plansForPlate.map((plan) => (
-          <option key={plan?.id} value={plan?.name}>{plan?.name}</option>
-        ))}
-      </Select>
+    <InputsContainer>
+      <FormControl>
+        <Select
+          native
+          onChange={(e) => {
+            dispatch(changeProduct(e.target.value));
+          }}
+          data-testid="plan-input"
+          value={useAppSelector(
+            ({ registerUser }) => registerUser.plan.product,
+          )}
+          required
+          id="product"
+          variant="outlined"
+        >
+          {plansForPlate.map((plan) => (
+            <option key={plan?.id} value={plan?.name}>
+              {plan?.name}
+            </option>
+          ))}
+        </Select>
+      </FormControl>
+
       <TextField
         required
         data-testid="begin-date-input"
@@ -88,7 +84,9 @@ export default function PlanForm() {
         onChange={(e) => {
           dispatch(changeEndDate(e.target.value));
         }}
-        value={useAppSelector(({ registerUser }) => registerUser.plan.end_date)}
+        value={useAppSelector(
+          ({ registerUser }) => registerUser.plan.end_date,
+        )}
         type="date"
         InputLabelProps={{
           shrink: true,
@@ -97,6 +95,6 @@ export default function PlanForm() {
         label="Data De Termino"
         variant="outlined"
       />
-    </FormControl>
+    </InputsContainer>
   );
 }

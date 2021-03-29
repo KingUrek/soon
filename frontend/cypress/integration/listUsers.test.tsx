@@ -43,7 +43,7 @@ describe('Testa resultados do cadastro ', () => {
   });
 });
 
-describe.only('Testa filtros da listagem de usuários ', () => {
+describe('Testa filtros da listagem de usuários ', () => {
   it('Testa se Lista traz usuários cadastrados.', () => {
     cy.visit('/');
     cy.get('[data-testid=name-input]').type('Gabriel');

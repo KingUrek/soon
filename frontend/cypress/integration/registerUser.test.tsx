@@ -52,7 +52,7 @@ describe('testa opções de planos', () => {
 });
 
 describe('Testa resultados do cadastro ', () => {
-  it.skip('Testa resultado de cadastro quando a requisição é bem sucedida.', () => {
+  it('Testa resultado de cadastro quando a requisição é bem sucedida.', () => {
     cy.visit('/');
 
     cy.get('[data-testid=name-input]').type('Gabriel');

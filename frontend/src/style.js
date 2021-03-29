@@ -10,8 +10,6 @@ export const AppContainer = styled.div`
 
 export const FlipCard = styled.div`
   position: relative;
-  padding:30px;
-
   width: 100%;
   height: 100%;
   text-align: center;
