@@ -9,6 +9,7 @@ import {
 } from '../../redux/Slicers/registerUser';
 
 import { Iplan } from '../../redux/Slicers/plans';
+import { Form } from './style';
 
 function isPlateEven(plate: string) {
   return parseInt(plate[plate.length - 1], 10) % 2 === 0;
@@ -33,7 +34,7 @@ export default function PlanForm() {
   ]);
 
   return (
-    <form>
+    <Form>
       <TextField
         onChange={(e) => {
           dispatch(changeProduct(e.target.value));
@@ -44,7 +45,7 @@ export default function PlanForm() {
         InputLabelProps={{
           shrink: true,
         }}
-        fullWidth
+        style={{ width: 300 }}
         type="text"
         id="product"
         label="Produto"
@@ -84,6 +85,6 @@ export default function PlanForm() {
         label="Data De Termino"
         variant="outlined"
       />
-    </form>
+    </Form>
   );
 }

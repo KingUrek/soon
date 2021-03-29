@@ -58,6 +58,7 @@ export const RegisterUserSlice = createSlice({
     changeEndDate: (state, action) => {
       state.plan.end_date = action.payload;
     },
+    resetUserData: () => initialState,
   },
 });
 
@@ -73,6 +74,7 @@ export const {
   changeBeginDate,
   changeEndDate,
   changeProduct,
+  resetUserData,
 } = RegisterUserSlice.actions;
 
 export declare type userInformationType = typeof initialState

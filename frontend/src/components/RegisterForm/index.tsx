@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import forms from './forms';
-import { getPlans } from '../utils/api';
-import { updatePlans } from '../redux/Slicers/plans';
-import { useAppDispatch } from '../redux/hooks';
+import forms from '../Forms';
+import { getPlans } from '../../utils/api';
+import { updatePlans } from '../../redux/Slicers/plans';
+import { useAppDispatch } from '../../redux/hooks';
 
 const { ClientForm, PlanForm, VehicleForm } = forms;
 declare interface RegisterFormProps {

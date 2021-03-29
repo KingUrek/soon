@@ -8,12 +8,13 @@ import {
   changePlate,
   changeYear,
 } from '../../redux/Slicers/registerUser';
+import { Form } from './style';
 
 export default function VehicleForm() {
   const dispatch = useAppDispatch();
 
   return (
-    <form>
+    <Form>
       <TextField
         required
         onChange={(e) => {
@@ -60,6 +61,6 @@ export default function VehicleForm() {
         label="Data"
         variant="outlined"
       />
-    </form>
+    </Form>
   );
 }

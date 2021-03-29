@@ -1,11 +1,12 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   setPlateFilter,
   setCustomerFilter,
   filterCustomerData,
-} from '../redux/Slicers/clients';
+} from '../../redux/Slicers/clients';
+import { Container } from './style';
 
 export default function TableFilter() {
   const dispatch = useAppDispatch();
@@ -32,13 +33,14 @@ export default function TableFilter() {
   }
 
   return (
-    <div>
+    <Container>
       <TextField
         InputLabelProps={{ shrink: true }}
         id="name_filter"
         label="Filtrar por nome"
         onChange={(e) => onChange('customer', e.target.value)}
         required
+        style={{ marginRight: 10 }}
         type="text"
         value={filters.customerFilter}
         variant="outlined"
@@ -48,6 +50,7 @@ export default function TableFilter() {
         id="plate_filter"
         label="Filtrar por placa"
         onChange={(e) => onChange('plate', e.target.value)}
+        style={{ marginRight: 10 }}
         required
         type="text"
         value={filters.plateFilter}
@@ -56,6 +59,6 @@ export default function TableFilter() {
       <Button variant="contained" color="primary" onClick={filterData}>
         Filtrar
       </Button>
-    </div>
+    </Container>
   );
 }

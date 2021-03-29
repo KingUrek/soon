@@ -1,22 +1,31 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { useAppSelector } from '../redux/hooks';
-import { subscribeCustomer } from '../utils/api';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { subscribeCustomer } from '../../utils/api';
+import {
+  UpdateStatusToFailure,
+  UpdateStatusToSucess,
+  resetToInitialState,
+  setCurrentStep,
+} from '../../redux/Slicers/pagestatus';
+import { resetUserData } from '../../redux/Slicers/registerUser';
 
 function isCompleted(stepInformation: string[]) {
   return stepInformation.every((data) => Boolean(data));
 }
 interface INextButton {
-  activeStep: number;
   steps: string[];
-  setActiveStep: Function;
 }
 export default function NextButton({
-  activeStep,
   steps,
-  setActiveStep,
 }: INextButton) {
+  const dispatch = useAppDispatch();
   const userInformation = useAppSelector(({ registerUser }) => registerUser);
+  const activeStep = useAppSelector(({ pageStatus }) => pageStatus.currentStep);
+  function setActiveStep(value:number) {
+    return dispatch(setCurrentStep(value));
+  }
 
   function getButtonText() {
     return activeStep === steps.length - 1 ? 'Salvar' : 'Proximo';
@@ -36,9 +45,17 @@ export default function NextButton({
     }
   }
 
+  function resetUserForm() {
+    dispatch(resetToInitialState());
+    dispatch(resetUserData());
+  }
   function buttonOnClick() {
     if (activeStep === steps.length - 1) {
-      return subscribeCustomer(userInformation);
+      return subscribeCustomer(userInformation)
+        .then(({ status }) => dispatch(
+          status === 500 ? UpdateStatusToFailure() : UpdateStatusToSucess(),
+        ))
+        .then(resetUserForm);
     }
     if (isStepCompleted(activeStep)) {
       return setActiveStep(activeStep + 1);
@@ -49,6 +66,7 @@ export default function NextButton({
     <Button
       variant="contained"
       color="primary"
+      style={{ marginLeft: '30%' }}
       onClick={buttonOnClick}
     >
       {getButtonText()}

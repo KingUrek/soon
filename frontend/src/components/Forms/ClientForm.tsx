@@ -8,12 +8,13 @@ import {
   changeCpf,
   changeEmail,
 } from '../../redux/Slicers/registerUser';
+import { Form } from './style';
 
 export default function ClientForm() {
   const dispatch = useAppDispatch();
 
   return (
-    <form>
+    <Form>
       <TextField
         onChange={(e) => {
           dispatch(changeName(e.target.value));
@@ -65,6 +66,6 @@ export default function ClientForm() {
         label="Email"
         variant="outlined"
       />
-    </form>
+    </Form>
   );
 }
